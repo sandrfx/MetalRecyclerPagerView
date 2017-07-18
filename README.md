@@ -4,11 +4,13 @@ Heavy-heavy metal made RecyclerView look and feel like a ViewPager.
 
 Additionally to the full charged power of RecyclerView you can setup margins for pager items to achieve the following effect:
 
+![Alt text](/screenshot.png?raw=true "MetalRecyclerPagerView screenshot")
+
 Let's rock!
 -----
 **1. Add MetalRecyclerPagerView into your layout**
 
-```java
+```xml
 <com.sandrlab.widgets.MetalRecyclerViewPager
     android:id="@+id/viewPager"
     android:layout_width="match_parent"
@@ -16,13 +18,13 @@ Let's rock!
     app:itemMargin="32dp"/>
 ```
 
-Here you can optionally set **app:itemMargin** attribute to add item margin: it affects left and right margins only.
+Here you can set **app:itemMargin** attribute to add item margin: it affects left and right margins only.
 
 **2. Create pager item view layout**
 
 Add **@+id/root_layout** id for your root item layout. For example:
 
-```java
+```xml
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/root_layout"
@@ -41,17 +43,20 @@ Add **@+id/root_layout** id for your root item layout. For example:
 </FrameLayout>
 ```
 
-**3. Create Adapter **
+**3. Create Adapter**
 
-2.1 Create your adapter as usual for RecyclerView but inherit it from a new **MetalRecyclerViewPager.MetalAdapter**.
-2.2 As for ViewHolder - also inherit it from **MetalRecyclerViewPager.MetalViewHolder** and call **super.onBindViewHolder(holder, position)**
-within your *onBindViewHolder* implementation (don't forget to call it, margins is not able to work properly without this thing).
+3.1 Create your adapter as usual for RecyclerView but inherit it from a new **MetalRecyclerViewPager.MetalAdapter**.
+
+3.2 As for ViewHolder - also inherit it from **MetalRecyclerViewPager.MetalViewHolder** and call **super.onBindViewHolder(holder, position)**
+within your *onBindViewHolder* implementation (don't forget to call it, item margins are not able to work properly without this thing).
 
 ```java
 public class YourCoolAdapter extends MetalRecyclerViewPager.MetalAdapter<YourCoolAdapter.YourCoolViewHolder> {
 
-    public YourCoolAdapter(@NonNull DisplayMetrics metrics) {
+    public YourCoolAdapter(@NonNull DisplayMetrics metrics, @NonNull List<String> yourDataSource) {
         super(metrics);
+        
+        // ...
     }
 
     @Override
@@ -75,7 +80,7 @@ public class YourCoolAdapter extends MetalRecyclerViewPager.MetalAdapter<YourCoo
 }
 ```
 
-**4. Put it all together **
+**4. Put it all together**
 
 To instantiate your adapter you will need to pass **DisplayMetrics** into it.
 No need to setup LayoutManager - it's already done within MetalRecyclerViewPager itself.
@@ -90,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
 
         DisplayMetrics metrics = getDisplayMetrics();
         List<String> metalList = Arrays.asList("\\m/", "\\m/", "\\m/");
-        FullMetalAdapter fullMetalAdapter = new FullMetalAdapter(metrics, metalList);
+        MetalRecyclerViewPager.MetalAdapter fullMetalAdapter = new YourCoolAdapter(metrics, metalList);
 
         MetalRecyclerViewPager viewPager = (MetalRecyclerViewPager) findViewById(R.id.viewPager);
         viewPager.setAdapter(fullMetalAdapter);
@@ -105,6 +110,15 @@ public class MainActivity extends AppCompatActivity {
     }
 }
 ```
+
+Download
+-----
+
+Simply copy [MetalRecyclerViewPager](library/src/main/java/com/sandrlab/widgets/MetalRecyclerViewPager.java) along with [attrs.xml](library/src/main/res/values/attrs.xml) and [ids.xml](library/src/main/res/values/ids.xml) into your project.
+
+Full sample project
+-----
+Find it [here](sample/).
 
 License
 -----
