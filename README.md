@@ -114,7 +114,7 @@ public class MainActivity extends AppCompatActivity {
 Download
 -----
 
-Simply copy [MetalRecyclerViewPager](library/src/main/java/com/sandrlab/widgets/MetalRecyclerViewPager.java) along with [attrs.xml](library/src/main/res/values/attrs.xml) and [ids.xml](library/src/main/res/values/ids.xml) into your project.
+Simply copy [MetalRecyclerViewPager.java](library/src/main/java/com/sandrlab/widgets/MetalRecyclerViewPager.java) along with [attrs.xml](library/src/main/res/values/attrs.xml) and [ids.xml](library/src/main/res/values/ids.xml) into your project.
 
 Full sample project
 -----
