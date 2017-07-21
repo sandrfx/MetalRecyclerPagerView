@@ -113,12 +113,45 @@ public class MainActivity extends AppCompatActivity {
 
 Download
 -----
-
 Simply copy [MetalRecyclerViewPager.java](library/src/main/java/com/sandrlab/widgets/MetalRecyclerViewPager.java) along with [attrs.xml](library/src/main/res/values/attrs.xml) and [ids.xml](library/src/main/res/values/ids.xml) into your project.
 
 Full sample project
 -----
 Find it [here](sample/).
+
+Known issues
+-----
+As we have a recycler view here, it always takes focus: if you place MetalRecyclerViewPager into ScrollView Android will automatically scroll layout to MetalRecyclerViewPager.
+To avoid this behavior place MetalRecyclerViewPager into [NestedScrollView](https://developer.android.com/reference/android/support/v4/widget/NestedScrollView.html) and add ```android:focusableInTouchMode="true"``` to upper container:
+
+```xml
+<android.support.v4.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:focusableInTouchMode="true"
+        android:orientation="vertical">
+        
+        <!-- ... -->
+        
+        <com.sandrlab.widgets.MetalRecyclerViewPager
+            android:id="@+id/viewPager"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:itemMargin="32dp"/> 
+            
+        <!-- ... -->
+        
+    </LinearLayout>
+
+</android.support.v4.widget.NestedScrollView>
+```
+
 
 License
 -----
